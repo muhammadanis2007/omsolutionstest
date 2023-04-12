@@ -1,0 +1,30 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "React JS Contact Form Test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muhammadanis2007/omsolutionstest.git"
+  },
+  "keywords": [
+    "Javascript",
+    "React",
+    "js",
+    "Contact",
+    "Form",
+    "Test"
+  ],
+  "author": "Muhammad Anees",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/muhammadanis2007/omsolutionstest/issues"
+  },
+  "homepage": "https://github.com/muhammadanis2007/omsolutionstest#readme",
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+}
