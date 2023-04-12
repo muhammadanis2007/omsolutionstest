@@ -1,0 +1,46 @@
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+
+function ContactForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
+
+  const onSubmit = (data) => {
+    setSubmitting(true);
+    axios.post('/api/send-email', data)
+      .then(() => {
+        setSuccess(true);
+        setSubmitting(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setSubmitting(false);
+      });
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label htmlFor="name">Name</label>
+      <input id="name" type="text" {...register('name', { required: true })} />
+      {errors.name && <span>Name is required</span>}
+
+      <label htmlFor="email">Email</label>
+      <input id="email" type="email" {...register('email', { required: true, pattern: /^\S+@\S+$/i })} />
+      {errors.email?.type === 'required' && <span>Email is required</span>}
+      {errors.email?.type === 'pattern' && <span>Invalid email format</span>}
+
+      <label htmlFor="message">Message</label>
+      <textarea id="message" {...register('message', { required: true })} />
+      {errors.message && <span>Message is required</span>}
+
+      {error && <div className="error">{error}</div>}
+      {success && <div className="success">Email sent successfully</div>}
+      <button type="submit" disabled={submitting}>Send</button>
+    </form>
+  );
+}
+
+export default ContactForm;
